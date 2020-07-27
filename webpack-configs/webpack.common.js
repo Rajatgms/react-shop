@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = () => {
   return {
@@ -23,8 +24,13 @@ module.exports = () => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        title: 'React Shop',
+        title: 'React Index',
         template: 'webpack-configs/templates/index.html',
+      }),
+      new CopyPlugin({
+        patterns: [
+          { from: 'src/images', to: 'images' }
+        ],
       }),
     ],
   };
