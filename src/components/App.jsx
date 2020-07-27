@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import { Button, Container, Row } from 'react-bootstrap';
 
 const App = () => {
   const [count, setCount] = useState(0);
   return (
-    <>
-      <div>Hello!!!</div>
-      <div>Count: {count}</div>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-    </>
+    <Container>
+      <Row className="justify-content-center">
+        <Button onClick={() => setCount(count + 1)}>Increment - {count}</Button>
+      </Row>
+    </Container>
   );
 };
 
