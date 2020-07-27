@@ -24,7 +24,7 @@ module.exports = () => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        title: 'React Index',
+        title: 'React Shop',
         template: 'webpack-configs/templates/index.html',
       }),
       new CopyPlugin({

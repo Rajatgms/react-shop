@@ -3,7 +3,8 @@ module.exports = () => ({
   mode: 'development',
   devtool: 'source-map',
   devServer: {
-    open: true
+    open: true,
+    historyApiFallback: true
   },
   plugins: [
     new MiniCssExtractPlugin(),
