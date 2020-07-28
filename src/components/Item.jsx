@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, ButtonGroup, Card } from 'react-bootstrap';
+import { func } from 'prop-types';
+import itemShape from '../proptypes/item';
 
 const Item = (props) => {
   const { item, addItem, removeItem } = props;
@@ -18,6 +20,12 @@ const Item = (props) => {
       </Card.Footer>
     </Card>
   );
+};
+
+Item.propTypes = {
+  item: itemShape.isRequired,
+  addItem: func.isRequired,
+  removeItem: func.isRequired,
 };
 
 export default Item;
