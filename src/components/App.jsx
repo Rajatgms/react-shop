@@ -11,7 +11,7 @@ const App = () => {
     const localCart = localStorage.getItem('cart');
     return localCart ? JSON.parse(localCart) : [];
   });
-  const [items, setItems] = useState();
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     fetchMarketItems().then(setItems);

@@ -3,6 +3,8 @@ import { CardDeck, Col } from 'react-bootstrap';
 import Loader from './Loader';
 import Item from './Item';
 import Flaticon from './Flaticon';
+import { arrayOf, func } from 'prop-types';
+import itemShape from '../proptypes/item';
 
 const Items = (props) => {
   const { items, addItem, removeItem } = props;
@@ -10,7 +12,7 @@ const Items = (props) => {
     <div>
       <CardDeck className="mx-0">
         {
-          items ?
+          items && items.length ?
             <>
               {
                 items.map(item => (
@@ -26,6 +28,12 @@ const Items = (props) => {
       </CardDeck>
     </div>
   );
+};
+
+Items.propTypes = {
+  items: arrayOf(itemShape).isRequired,
+  addItem: func.isRequired,
+  removeItem: func.isRequired,
 };
 
 export default Items;

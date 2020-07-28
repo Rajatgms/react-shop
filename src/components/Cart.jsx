@@ -3,6 +3,8 @@ import { Button, Container, Table } from 'react-bootstrap';
 import placeOrder from '../API/placeOrder';
 import Notification from './Notification';
 import Loader from './Loader';
+import { arrayOf, func } from 'prop-types';
+import itemShape from '../proptypes/item';
 
 const emptyCartMessage = 'Your cart is empty. Please add items from home page!!!';
 
@@ -38,7 +40,7 @@ const Cart = (props) => {
             {
               cart && cart.length > 0 ?
                 <>
-                  <Table variant='light' className="dark" size='sm' className='text-center'>
+                  <Table variant='light' className="dark text-center" size='sm'>
                     <thead className='thead-light'>
                     <tr>
                       <th>Item</th>
@@ -58,17 +60,17 @@ const Cart = (props) => {
                     }
                     <tr className='table-active'>
                       <td>Sub Total</td>
-                      <td></td>
+                      <td/>
                       <td>{subTotal}$</td>
                     </tr>
                     <tr className='table-active'>
                       <td>Shipping</td>
-                      <td></td>
+                      <td/>
                       <td>10$</td>
                     </tr>
                     <tr className='table-active'>
                       <td>Tax(5%)</td>
-                      <td></td>
+                      <td/>
                       <td>{subTotal * 0.05}$</td>
                     </tr>
                     <tr className='table-info'>
@@ -92,6 +94,11 @@ const Cart = (props) => {
       }
     </>
   );
+};
+
+Cart.propTypes = {
+  cart: arrayOf(itemShape).isRequired,
+  setCart: func.isRequired,
 };
 
 export default Cart;

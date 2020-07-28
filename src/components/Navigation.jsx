@@ -1,6 +1,8 @@
 import React from 'react';
 import { Badge, Button, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { arrayOf } from 'prop-types';
+import itemShape from '../proptypes/item';
 
 const Navigation = (props) => {
   const { cart } = props;
@@ -37,6 +39,10 @@ const Navigation = (props) => {
       </Navbar.Collapse>
     </Navbar>
   );
+};
+
+Navigation.propTypes = {
+  cart: arrayOf(itemShape).isRequired,
 };
 
 export default Navigation;
