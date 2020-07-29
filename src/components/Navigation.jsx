@@ -2,7 +2,7 @@ import React from 'react';
 import { Badge, Button, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { arrayOf } from 'prop-types';
-import itemShape from '../proptypes/item';
+import itemShape from '../proptypes/itemShape';
 
 const Navigation = (props) => {
   const { cart } = props;
