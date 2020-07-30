@@ -8,6 +8,7 @@ import LoaderContainer from '../containers/LoaderContainer';
 import NotifyContainer from '../containers/NotifyContainer';
 
 const App = () => {
+  console.log('App Re-rendered');
   return (
     <Router>
       <Container fluid className="p-0">

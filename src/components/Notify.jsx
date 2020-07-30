@@ -14,6 +14,7 @@ const Notify = (props) => {
     setShow(false);
   };
 
+  console.log('Notify Re-rendered');
   return (
     show ?
       <Alert variant={variant} className="text-center" onClose={onClose} dismissible>

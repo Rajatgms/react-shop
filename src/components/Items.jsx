@@ -18,6 +18,7 @@ const Items = (props) => {
     }
   }, [startLoader, saveItems, items.length]);
 
+  console.log('Items Re-rendered');
   return (
     items && items.length > 0 &&
     <CardDeck className="mx-0">

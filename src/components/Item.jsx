@@ -26,6 +26,7 @@ const Item = (props) => {
     }
   };
 
+  console.log('Item Re-rendered');
   return (
     <Card className="my-3 mx-0" bg="light">
       <Card.Img src={`images/${item.name.toLowerCase()}.svg`} className="mx-auto w-25 pt-3"/>

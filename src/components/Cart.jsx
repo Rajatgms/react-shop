@@ -25,6 +25,7 @@ const Cart = (props) => {
       .finally(() => startLoader(false));
   };
 
+  console.log('Cart Re-rendered');
   return (
     <Container className="d-flex flex-column mt-5">
       {
