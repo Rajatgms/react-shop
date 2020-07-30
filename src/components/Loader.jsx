@@ -4,6 +4,7 @@ import { Spinner } from 'react-bootstrap';
 
 const Loader = (props) => {
   const { loader } = props;
+
   return (
     loader &&
     <div className="d-flex justify-content-center flex-fill mt-5">

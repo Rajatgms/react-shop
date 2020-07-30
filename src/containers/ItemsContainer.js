@@ -6,8 +6,7 @@ import { startLoaderAction } from '../actions/loaderAction';
 
 const mapStateToProps = (state) => {
   return {
-    items: state.items,
-    cart: state.cart,
+    items: state.items
   };
 };
 

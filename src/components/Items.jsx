@@ -19,21 +19,17 @@ const Items = (props) => {
   }, [startLoader, saveItems, items.length]);
 
   return (
-    <>
+    items && items.length > 0 &&
+    <CardDeck className="mx-0">
       {
-        items && items.length > 0 &&
-        <CardDeck className="mx-0">
-          {
-            items.map(item => (
-              <Col md={3} key={item.name}>
-                <ItemContainer item={item}/>
-              </Col>
-            ))
-          }
-          <Flaticon/>
-        </CardDeck>
+        items.map(item => (
+          <Col md={3} key={item.name}>
+            <ItemContainer item={item}/>
+          </Col>
+        ))
       }
-    </>
+      <Flaticon/>
+    </CardDeck>
   );
 };
 

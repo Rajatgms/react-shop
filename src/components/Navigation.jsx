@@ -7,6 +7,7 @@ import itemShape from '../proptypes/itemShape';
 const Navigation = (props) => {
   const { cart } = props;
   const cartItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <Navbar bg="info" expand>
       <Link to="/">
