@@ -5,6 +5,8 @@ import fetchMarketItems from '../API/fetchMarketItems';
 import Navigation from './Navigation';
 import Items from './Items';
 import Cart from './Cart';
+import Loader from './Loader';
+import Notify from './Notify';
 
 const App = () => {
   const [cart, setCart] = useState(() => {
@@ -12,9 +14,15 @@ const App = () => {
     return localCart ? JSON.parse(localCart) : [];
   });
   const [items, setItems] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const [notify, setNotify] = useState(null);
 
   useEffect(() => {
-    fetchMarketItems().then(setItems);
+    setLoader(true);
+    fetchMarketItems().then((result) => {
+      setItems(result);
+      setLoader(false);
+    });
   }, []);
 
   useEffect(() => {
@@ -44,12 +52,14 @@ const App = () => {
     <Router>
       <Container fluid className="p-0">
         <Navigation cart={cart}/>
+        {loader && <Loader/>}
+        {notify && <Notify variant={notify.variant} message={notify.message}/>}
         <Switch>
           <Route exact path="/items">
             <Items items={items} addItem={addItem} removeItem={removeItem}/>
           </Route>
           <Route exact path="/cart">
-            <Cart cart={cart} setCart={setCart}/>
+            <Cart cart={cart} setCart={setCart} setLoader={setLoader} setNotify={setNotify}/>
           </Route>
           <Redirect to="/items"/>
         </Switch>
