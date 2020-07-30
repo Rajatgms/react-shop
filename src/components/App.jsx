@@ -48,6 +48,7 @@ const App = () => {
     }
   };
 
+  console.log('App Re-rendered');
   return (
     <Router>
       <Container fluid className="p-0">
