@@ -1,22 +1,23 @@
-We used Redux and React-Redux to do state management of React Shop Application.
+Used Redux, React-Redux, Redux-Thunk to do state management of React Shop Application.
 
-- We used Redux HOC approach - mapStateToProps and mapDispatchToProp.
-
+- Used Redux mapStateToProps and mapDispatchToProp.
+- Used Redux-Thunk middleware to define async action creator and access store at action creator.
 
 Pros - 
 1. Centralized state management.
 2. No prop-drilling.
 3. Business logic at Redux layer such as Fetch API. 
 4. No unnecessary component re-render.
-
+5. Usage of Redux-Thunk add simplicity - 
+    
+    a. One action creator syntax - Dispatch Action object or async function from container component.
+    
+    b. Store can be access in action creator function.
+    
+    c. Redux store can be access in action creator hence component no need to map unnecessary state.
+    
+    d. Due to `point c` re-rendering of component due to unnecessary state will remove.
+         
 Cons - 
 1. Need to configure redux.
 2. Manage Redux - action, reducer and container.
-3. Component need to switch between two patterns - 
-
-    a. `For synchronous action creator - dispatch(action_creator);`
-    
-    b. `For Asynchronous action creator - async_action_creator(dispatch);` 
-
-4. No access of Redux state in action creator hence for state based conditional logic
-   either `pass state from component` or `import and use store.getState`. 

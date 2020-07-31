@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleCartPaymentAsync: () => handleCartPaymentAsync(dispatch),
+    handleCartPaymentAsync: () => dispatch(handleCartPaymentAsync()),
   };
 };
 

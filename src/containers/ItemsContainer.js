@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchItemAsync: () => fetchItemAsync(dispatch),
+    fetchItemAsync: () => dispatch(fetchItemAsync()),
   };
 };
 const ItemsContainer = connect(mapStateToProps, mapDispatchToProps)(Items);

@@ -1,18 +1,14 @@
 import React from 'react';
 import { Button, ButtonGroup, Card } from 'react-bootstrap';
-import { arrayOf, func } from 'prop-types';
+import { func } from 'prop-types';
 import itemShape from '../proptypes/itemShape';
 
 const Item = (props) => {
-  const { item, cart, addItem, removeItem } = props;
+  const { item, addItem, removeItem } = props;
 
-  const handleAddItem = () => {
-    addItem(item, cart);
-  };
+  const handleAddItem = () => addItem(item);
 
-  const handleRemoveItem = () => {
-    removeItem(item, cart);
-  };
+  const handleRemoveItem = () => removeItem(item);
 
   console.log('Item Re-rendered');
   return (
@@ -34,7 +30,6 @@ const Item = (props) => {
 
 Item.propTypes = {
   item: itemShape.isRequired,
-  cart: arrayOf(itemShape).isRequired,
   addItem: func.isRequired,
   removeItem: func.isRequired,
 };
