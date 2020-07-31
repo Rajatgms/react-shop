@@ -4,26 +4,14 @@ import { arrayOf, func } from 'prop-types';
 import itemShape from '../proptypes/itemShape';
 
 const Item = (props) => {
-  const { item, cart, updateCart } = props;
+  const { item, cart, addItem, removeItem } = props;
 
-  const addItem = () => {
-    const itemExist = cart.find(cartItem => cartItem.name === item.name);
-    if (itemExist) {
-      itemExist.quantity++;
-      updateCart([...cart]);
-    } else {
-      updateCart([...cart, { ...item, quantity: 1 }]);
-    }
+  const handleAddItem = () => {
+    addItem(item, cart);
   };
 
-  const removeItem = () => {
-    const itemExist = cart.find(cartItem => cartItem.name === item.name);
-    if (itemExist && itemExist.quantity > 1) {
-      itemExist.quantity--;
-      updateCart([...cart]);
-    } else {
-      updateCart(cart.filter(cartItem => cartItem.name !== item.name));
-    }
+  const handleRemoveItem = () => {
+    removeItem(item, cart);
   };
 
   console.log('Item Re-rendered');
@@ -36,8 +24,8 @@ const Item = (props) => {
       </Card.Body>
       <Card.Footer>
         <ButtonGroup className="d-flex justify-content-around" aria-label="Number of items selector">
-          <Button variant="primary" onClick={addItem}>+</Button>
-          <Button variant="primary" onClick={removeItem}>-</Button>
+          <Button variant="primary" onClick={handleAddItem}>+</Button>
+          <Button variant="primary" onClick={handleRemoveItem}>-</Button>
         </ButtonGroup>
       </Card.Footer>
     </Card>
@@ -47,7 +35,8 @@ const Item = (props) => {
 Item.propTypes = {
   item: itemShape.isRequired,
   cart: arrayOf(itemShape).isRequired,
-  updateCart: func.isRequired,
+  addItem: func.isRequired,
+  removeItem: func.isRequired,
 };
 
 export default Item;

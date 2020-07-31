@@ -1,8 +1,6 @@
 import { connect } from 'react-redux';
 import Cart from '../components/Cart';
-import { saveCartAction } from '../actions/cartAction';
-import { startLoaderAction } from '../actions/loaderAction';
-import { notifyErrorAction, notifySuccessAction } from '../actions/notifyAction';
+import { handleCartPaymentAsync } from '../actions/cartAction';
 
 const mapStateToProps = (state) => {
   return {
@@ -12,10 +10,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveCart: payload => dispatch(saveCartAction(payload)),
-    startLoader: payload => dispatch(startLoaderAction(payload)),
-    notifySuccess: payload => dispatch(notifySuccessAction(payload)),
-    notifyError: payload => dispatch(notifyErrorAction(payload)),
+    handleCartPaymentAsync: () => handleCartPaymentAsync(dispatch),
   };
 };
 

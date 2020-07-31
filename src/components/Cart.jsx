@@ -1,29 +1,15 @@
 import React from 'react';
 import { Alert, Button, Container, Table } from 'react-bootstrap';
-import placeOrder from '../API/placeOrder';
 import { arrayOf, func } from 'prop-types';
 import itemShape from '../proptypes/itemShape';
 
 const emptyCartMessage = 'Your cart is empty. Please add items from home page!!!';
 
 const Cart = (props) => {
-  const { cart, saveCart, startLoader, notifySuccess, notifyError } = props;
+  const { cart, handleCartPaymentAsync } = props;
   const subTotal = cart.reduce((sum, cartItem) => {
     return sum + (cartItem.quantity * cartItem.price);
   }, 0);
-
-  const handlePayment = () => {
-    startLoader(true);
-    placeOrder(false)
-      .then(result => {
-        saveCart([]);
-        notifySuccess(result.message);
-      })
-      .catch(error => {
-        notifyError(error.message);
-      })
-      .finally(() => startLoader(false));
-  };
 
   console.log('Cart Re-rendered');
   return (
@@ -70,7 +56,7 @@ const Cart = (props) => {
               </tr>
               </tbody>
             </Table>
-            <Button variant="primary" size="lg" block onClick={handlePayment}>
+            <Button variant="primary" size="lg" block onClick={handleCartPaymentAsync}>
               Make Payment
             </Button>
           </> :
@@ -84,10 +70,7 @@ const Cart = (props) => {
 
 Cart.propTypes = {
   cart: arrayOf(itemShape).isRequired,
-  saveCart: func.isRequired,
-  startLoader: func.isRequired,
-  notifySuccess: func.isRequired,
-  notifyError: func.isRequired,
+  handleCartPaymentAsync: func.isRequired,
 };
 
 export default Cart;

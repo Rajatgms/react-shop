@@ -1,6 +1,6 @@
 import Item from '../components/Item';
 import { connect } from 'react-redux';
-import { updateCartAction } from '../actions/cartAction';
+import { addItem, removeItem } from '../actions/cartAction';
 
 const mapStateToProps = (state) => {
   return {
@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateCart: payload => dispatch(updateCartAction(payload)),
+    addItem: (item, cart) => dispatch(addItem(item, cart)),
+    removeItem: (item, cart) => dispatch(removeItem(item, cart)),
   };
 };
 const ItemContainer = connect(mapStateToProps, mapDispatchToProps)(Item);

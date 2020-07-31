@@ -3,20 +3,16 @@ import { CardDeck, Col } from 'react-bootstrap';
 import Flaticon from './Flaticon';
 import { arrayOf, func } from 'prop-types';
 import itemShape from '../proptypes/itemShape';
-import fetchMarketItems from '../API/fetchMarketItems';
 import ItemContainer from '../containers/ItemContainer';
 
 const Items = (props) => {
-  const { items, saveItems, startLoader } = props;
+  const { items, fetchItemAsync } = props;
 
   useEffect(() => {
-    if(items.length === 0) {
-      startLoader(true);
-      fetchMarketItems()
-        .then(items => saveItems(items))
-        .finally(() => startLoader(false));
+    if (items.length === 0) {
+      fetchItemAsync();
     }
-  }, [startLoader, saveItems, items.length]);
+  }, [fetchItemAsync, items.length]);
 
   console.log('Items Re-rendered');
   return (
@@ -36,8 +32,7 @@ const Items = (props) => {
 
 Items.propTypes = {
   items: arrayOf(itemShape),
-  saveItems: func.isRequired,
-  startLoader: func.isRequired,
+  fetchItemAsync: func.isRequired,
 };
 
 Items.defaultProps = {

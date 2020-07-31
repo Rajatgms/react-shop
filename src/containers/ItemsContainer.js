@@ -1,20 +1,16 @@
 import Items from '../components/Items';
 import { connect } from 'react-redux';
-import { saveItemAction } from '../actions/itemsAction';
-import { updateCartAction } from '../actions/cartAction';
-import { startLoaderAction } from '../actions/loaderAction';
+import { fetchItemAsync } from '../actions/itemsAction';
 
 const mapStateToProps = (state) => {
   return {
-    items: state.items
+    items: state.items,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveItems: payload => dispatch(saveItemAction(payload)),
-    updateCart: payload => dispatch(updateCartAction(payload)),
-    startLoader: payload => dispatch(startLoaderAction(payload)),
+    fetchItemAsync: () => fetchItemAsync(dispatch),
   };
 };
 const ItemsContainer = connect(mapStateToProps, mapDispatchToProps)(Items);
