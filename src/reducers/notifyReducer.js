@@ -1,4 +1,4 @@
-import { NOTIFY_SUCCESS, NOTIFY_ERROR } from '../actions/notifyAction';
+import { NOTIFY_ERROR, NOTIFY_RESET, NOTIFY_SUCCESS } from '../actions/notifyAction';
 
 const initialAlert = {
   variant: '',
@@ -7,9 +7,11 @@ const initialAlert = {
 
 const notifyReducer = (alert = initialAlert, action) => {
   if (action.type === NOTIFY_SUCCESS) {
-    return { ...alert, variant: 'success', message: action.payload};
+    return { variant: 'success', message: action.payload };
   } else if (action.type === NOTIFY_ERROR) {
-    return { ...alert, variant: 'danger', message: action.payload};
+    return { variant: 'danger', message: action.payload };
+  } else if(action.type === NOTIFY_RESET){
+    return initialAlert;
   }
   return alert;
 };

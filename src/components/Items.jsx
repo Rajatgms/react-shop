@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react';
 import { CardDeck, Col } from 'react-bootstrap';
 import Flaticon from './Flaticon';
-import { arrayOf, func } from 'prop-types';
-import itemShape from '../proptypes/itemShape';
-import ItemContainer from '../containers/ItemContainer';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchItemAsync } from '../actions/itemsAction';
+import Item from './Item';
 
-const Items = (props) => {
-  const { items, fetchItemAsync } = props;
+const Items = () => {
+  const items = useSelector(state => state.items);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (items.length === 0) {
-      fetchItemAsync();
+      dispatch(fetchItemAsync());
     }
-  }, [fetchItemAsync, items.length]);
+  }, [dispatch, items.length]);
 
   console.log('Items Re-rendered');
   return (
@@ -21,7 +22,7 @@ const Items = (props) => {
       {
         items.map(item => (
           <Col md={3} key={item.name}>
-            <ItemContainer item={item}/>
+            <Item item={item}/>
           </Col>
         ))
       }
@@ -30,12 +31,4 @@ const Items = (props) => {
   );
 };
 
-Items.propTypes = {
-  items: arrayOf(itemShape),
-  fetchItemAsync: func.isRequired,
-};
-
-Items.defaultProps = {
-  items: [],
-};
 export default Items;

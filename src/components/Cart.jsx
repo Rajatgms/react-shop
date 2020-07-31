@@ -1,12 +1,16 @@
 import React from 'react';
 import { Alert, Button, Container, Table } from 'react-bootstrap';
-import { arrayOf, func } from 'prop-types';
-import itemShape from '../proptypes/itemShape';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleCartPaymentAsyncAction } from '../actions/cartAction';
 
 const emptyCartMessage = 'Your cart is empty. Please add items from home page!!!';
 
-const Cart = (props) => {
-  const { cart, handleCartPaymentAsync } = props;
+const Cart = () => {
+  const cart = useSelector(state => state.cart);
+  const dispatch = useDispatch();
+
+  const handleCartPaymentAsync = () => dispatch(handleCartPaymentAsyncAction());
+
   const subTotal = cart.reduce((sum, cartItem) => {
     return sum + (cartItem.quantity * cartItem.price);
   }, 0);
@@ -66,11 +70,6 @@ const Cart = (props) => {
       }
     </Container>
   );
-};
-
-Cart.propTypes = {
-  cart: arrayOf(itemShape).isRequired,
-  handleCartPaymentAsync: func.isRequired,
 };
 
 export default Cart;

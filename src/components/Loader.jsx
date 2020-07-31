@@ -1,9 +1,9 @@
 import React from 'react';
-import { bool } from 'prop-types';
 import { Spinner } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
-const Loader = (props) => {
-  const { loader } = props;
+const Loader = () => {
+  const loader = useSelector(state => state.loader);
 
   console.log('Loader Re-rendered');
   return (
@@ -12,10 +12,6 @@ const Loader = (props) => {
       <Spinner animation="grow" variant="info"/>
     </div>
   );
-};
-
-Loader.propTypes = {
-  loader: bool,
 };
 
 export default Loader;

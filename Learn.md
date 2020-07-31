@@ -1,6 +1,6 @@
 Used Redux, React-Redux, Redux-Thunk to do state management of React Shop Application.
 
-- Used Redux mapStateToProps and mapDispatchToProp.
+- Used Redux useSelector and useDispatch.
 - Used Redux-Thunk middleware to define async action creator and access store at action creator.
 
 Pros - 
@@ -17,7 +17,9 @@ Pros -
     c. Redux store can be access in action creator hence component no need to map unnecessary state.
     
     d. Due to `point c` re-rendering of component due to unnecessary state will remove.
-         
+
+6. Improved code readability as no need to create Container Component after useSelector and useDispatch. 
+ 
 Cons - 
 1. Need to configure redux.
 2. Manage Redux - action, reducer and container.

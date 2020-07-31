@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-bootstrap';
-import notifyShape from '../proptypes/notifyShape';
+import { useDispatch, useSelector } from 'react-redux';
+import { notifyResetAction } from '../actions/notifyAction';
 
-const Notify = (props) => {
-  const { variant, message } = props.notify;
+const Notify = () => {
+  const { variant, message } = useSelector(state => state.notify);
   const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setShow(variant && message);
@@ -12,6 +14,7 @@ const Notify = (props) => {
 
   const onClose = () => {
     setShow(false);
+    dispatch(notifyResetAction());
   };
 
   console.log('Notify Re-rendered');
@@ -21,10 +24,6 @@ const Notify = (props) => {
         {message}
       </Alert> : null
   );
-};
-
-Notify.propTypes = {
-  notify: notifyShape.isRequired,
 };
 
 export default Notify;

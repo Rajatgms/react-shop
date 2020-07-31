@@ -1,11 +1,10 @@
 import React from 'react';
 import { Badge, Button, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { arrayOf } from 'prop-types';
-import itemShape from '../proptypes/itemShape';
+import { useSelector } from 'react-redux';
 
-const Navigation = (props) => {
-  const { cart } = props;
+const Navigation = () => {
+  const cart = useSelector(state => state.cart);
   const cartItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   console.log('Navigation Re-rendered');
@@ -41,10 +40,6 @@ const Navigation = (props) => {
       </Navbar.Collapse>
     </Navbar>
   );
-};
-
-Navigation.propTypes = {
-  cart: arrayOf(itemShape).isRequired,
 };
 
 export default Navigation;

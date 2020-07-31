@@ -1,14 +1,15 @@
 import React from 'react';
 import { Button, ButtonGroup, Card } from 'react-bootstrap';
-import { func } from 'prop-types';
 import itemShape from '../proptypes/itemShape';
+import { useDispatch } from 'react-redux';
+import { addItem, removeItem } from '../actions/cartAction';
 
 const Item = (props) => {
-  const { item, addItem, removeItem } = props;
+  const { item } = props;
+  const dispatch = useDispatch();
 
-  const handleAddItem = () => addItem(item);
-
-  const handleRemoveItem = () => removeItem(item);
+  const handleAddItem = () => dispatch(addItem(item));
+  const handleRemoveItem = () => dispatch(removeItem(item));
 
   console.log('Item Re-rendered');
   return (
@@ -30,8 +31,6 @@ const Item = (props) => {
 
 Item.propTypes = {
   item: itemShape.isRequired,
-  addItem: func.isRequired,
-  removeItem: func.isRequired,
 };
 
 export default Item;

@@ -33,7 +33,7 @@ export const removeItem = (item) => {
   }
 };
 
-export const handleCartPaymentAsync = () => {
+export const handleCartPaymentAsyncAction = () => {
   return dispatch => {
     dispatch(startLoaderAction(true));
     placeOrder(false)
