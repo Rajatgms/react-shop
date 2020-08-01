@@ -1,16 +1,18 @@
+import { saveCartAction, updateCartAction } from '../actions/cartAction';
+import { createReducer } from '@reduxjs/toolkit';
+
 const localCart = localStorage.getItem('cart');
 const initialCartState = localCart ? JSON.parse(localCart) : [];
 
-const cartReducer = (cart = initialCartState, action) => {
-  if (action.type === 'UPDATE_CART') {
+const cartReducer = createReducer(initialCartState, {
+  [updateCartAction]: (state, action) => {
     localStorage.setItem('cart', JSON.stringify(action.payload));
     return [...action.payload];
-  } else if (action.type === 'SAVE_CART') {
+  },
+  [saveCartAction]: (state, action) => {
     localStorage.setItem('cart', JSON.stringify(action.payload));
     return [...action.payload];
-  }
-
-  return cart;
-};
+  },
+});
 
 export default cartReducer;

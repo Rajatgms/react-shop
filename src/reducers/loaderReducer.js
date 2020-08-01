@@ -1,10 +1,8 @@
-import { LOADER } from '../actions/loaderAction';
+import { startLoaderAction } from '../actions/loaderAction';
+import { createReducer } from '@reduxjs/toolkit';
 
-const loaderReducer = (loader = false, action) => {
-  if (action.type === LOADER) {
-    return action.payload;
-  }
-  return loader;
-};
+const loaderReducer = createReducer(false, {
+  [startLoaderAction]: (state, action) => action.payload,
+});
 
 export default loaderReducer;

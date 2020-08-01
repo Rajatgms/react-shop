@@ -1,10 +1,7 @@
-import { SAVE_ITEMS } from '../actions/itemsAction';
+import { saveItemAction } from '../actions/itemsAction';
+import { createReducer } from '@reduxjs/toolkit';
 
-const itemsReducer = (items = [], action) => {
-  if (action.type === SAVE_ITEMS) {
-    return [...action.payload];
-  }
-  return items;
-};
-
+const itemsReducer = createReducer([], {
+  [saveItemAction]: (state, action) => [...state, ...action.payload],
+});
 export default itemsReducer;

@@ -1,11 +1,12 @@
 import placeOrder from '../API/placeOrder';
 import { startLoaderAction } from './loaderAction';
 import { notifyErrorAction, notifySuccessAction } from './notifyAction';
+import { createAction } from '@reduxjs/toolkit';
 
 export const UPDATE_CART = 'UPDATE_CART';
 export const SAVE_CART = 'SAVE_CART';
-export const updateCartAction = payload => ({type: UPDATE_CART, payload});
-export const saveCartAction = payload => ({type: SAVE_CART, payload});
+export const updateCartAction = createAction(UPDATE_CART);
+export const saveCartAction = createAction(SAVE_CART);
 
 function nestedCopy(array) {
   return JSON.parse(JSON.stringify(array));

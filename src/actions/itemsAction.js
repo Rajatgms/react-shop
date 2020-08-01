@@ -1,9 +1,10 @@
 import fetchMarketItems from '../API/fetchMarketItems';
 import { startLoaderAction } from './loaderAction';
+import { createAction } from '@reduxjs/toolkit';
 
 export const SAVE_ITEMS = 'SAVE_ITEMS';
 
-export const saveItemAction = payload => ({ type: SAVE_ITEMS, payload });
+export const saveItemAction = createAction(SAVE_ITEMS);
 
 export const fetchItemAsync = () => {
   return dispatch => {

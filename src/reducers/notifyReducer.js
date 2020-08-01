@@ -1,19 +1,19 @@
-import { NOTIFY_ERROR, NOTIFY_RESET, NOTIFY_SUCCESS } from '../actions/notifyAction';
+import { notifyErrorAction, notifyResetAction, notifySuccessAction } from '../actions/notifyAction';
+import { createReducer } from '@reduxjs/toolkit';
 
 const initialAlert = {
   variant: '',
   message: '',
 };
 
-const notifyReducer = (alert = initialAlert, action) => {
-  if (action.type === NOTIFY_SUCCESS) {
-    return { variant: 'success', message: action.payload };
-  } else if (action.type === NOTIFY_ERROR) {
-    return { variant: 'danger', message: action.payload };
-  } else if(action.type === NOTIFY_RESET){
-    return initialAlert;
-  }
-  return alert;
-};
+const notifyReducer = createReducer(initialAlert, {
+  [notifySuccessAction]: (state, action) => (
+    { variant: 'success', message: action.payload }
+  ),
+  [notifyErrorAction]: (state, action) => (
+    { variant: 'danger', message: action.payload }
+  ),
+  [notifyResetAction]: () => initialAlert,
+});
 
 export default notifyReducer;
