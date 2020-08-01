@@ -7,30 +7,38 @@ export const SAVE_CART = 'SAVE_CART';
 export const updateCartAction = payload => ({type: UPDATE_CART, payload});
 export const saveCartAction = payload => ({type: SAVE_CART, payload});
 
+function nestedCopy(array) {
+  return JSON.parse(JSON.stringify(array));
+}
+
 export const addItem = (item) => {
   return (dispatch, getStore) => {
     const {cart} = getStore();
-    const itemExist = cart.find(cartItem => cartItem.name === item.name);
+    const cartNestedCopy = nestedCopy(cart);
+
+    const itemExist = cartNestedCopy.find(cartItem => cartItem.name === item.name);
     if (itemExist) {
       itemExist.quantity++;
-      dispatch(updateCartAction([...cart]));
+      dispatch(updateCartAction([...cartNestedCopy]));
     } else {
-      dispatch(updateCartAction([...cart, { ...item, quantity: 1 }]));
+      dispatch(updateCartAction([...cartNestedCopy, { ...item, quantity: 1 }]));
     }
   }
 };
 
 export const removeItem = (item) => {
   return (dispatch, getStore) => {
-    const {cart} = getStore();
-    const itemExist = cart.find(cartItem => cartItem.name === item.name);
+    const { cart } = getStore();
+    const cartNestedCopy = nestedCopy(cart);
+
+    const itemExist = cartNestedCopy.find(cartItem => cartItem.name === item.name);
     if (itemExist && itemExist.quantity > 1) {
       itemExist.quantity--;
-      dispatch(updateCartAction([...cart]));
+      dispatch(updateCartAction([...cartNestedCopy]));
     } else {
-      dispatch(updateCartAction(cart.filter(cartItem => cartItem.name !== item.name)));
+      dispatch(updateCartAction(cartNestedCopy.filter(cartItem => cartItem.name !== item.name)));
     }
-  }
+  };
 };
 
 export const handleCartPaymentAsyncAction = () => {
@@ -45,5 +53,5 @@ export const handleCartPaymentAsyncAction = () => {
         dispatch(notifyErrorAction(error.message));
       })
       .finally(() => dispatch(startLoaderAction(false)));
-  }
+  };
 };

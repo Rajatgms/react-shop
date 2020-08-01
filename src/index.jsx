@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/style.scss';
 import App from './components/App';
-import { applyMiddleware, compose, createStore } from 'redux';
 import rootReducer from './reducers/rootReducers';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 
-const devToolMiddleware = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
-const store = createStore(rootReducer, compose(applyMiddleware(thunk), devToolMiddleware));
-
+const store = configureStore({
+  reducer: rootReducer
+});
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
