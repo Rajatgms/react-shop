@@ -1,4 +1,4 @@
-import { placeOrderThunk, saveCart } from '../slice/cartSlice';
+import { placeOrderThunk } from '../slice/cartSlice';
 import { startLoader } from '../slice/loaderSlice';
 import { error, success } from '../slice/notifySlice';
 import { unwrapResult } from '@reduxjs/toolkit';
@@ -11,7 +11,6 @@ export const handleCartPaymentAsyncAction = () => {
       // extract the payload or error from the action and return or throw the result
       .then(unwrapResult)
       .then(result => {
-        dispatch(saveCart([]));
         dispatch(success(result.message));
       })
       .catch(e => {

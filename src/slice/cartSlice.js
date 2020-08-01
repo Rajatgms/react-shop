@@ -45,6 +45,10 @@ const cartSlice = createSlice({
       return [...action.payload];
     },
   },
+  extraReducers: {
+    // if order placed clear cart
+    [placeOrderThunk.fulfilled]: () => []
+  }
 });
 
 const {actions, reducer} = cartSlice;
