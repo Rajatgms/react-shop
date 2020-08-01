@@ -2,14 +2,14 @@ import React from 'react';
 import { Button, ButtonGroup, Card } from 'react-bootstrap';
 import itemShape from '../proptypes/itemShape';
 import { useDispatch } from 'react-redux';
-import { addItem, removeItem } from '../actions/cartAction';
+import { addCart, removeCart } from '../slice/cartSlice';
 
 const Item = (props) => {
   const { item } = props;
   const dispatch = useDispatch();
 
-  const handleAddItem = () => dispatch(addItem(item));
-  const handleRemoveItem = () => dispatch(removeItem(item));
+  const handleAddItem = () => dispatch(addCart(item));
+  const handleRemoveItem = () => dispatch(removeCart(item));
 
   console.log('Item Re-rendered');
   return (
