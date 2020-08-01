@@ -4,6 +4,11 @@ import fetchMarketItems from '../API/fetchMarketItems';
 export const fetchAllItems = createAsyncThunk(
   'items/fetchAllItems',
   fetchMarketItems,
+  {
+    condition: (arg, api) => {
+      return !api.getState().items.length > 0;
+    },
+  },
 );
 const itemsSlice = createSlice({
   name: 'items',
@@ -13,7 +18,7 @@ const itemsSlice = createSlice({
   },
   extraReducers: {
     // if API successfully fetch all item save it to store items
-    [fetchAllItems.fulfilled]: (state, action) => action.payload,
+    [fetchAllItems.fulfilled]: (state, action) => [...state, ...action.payload],
   },
 });
 

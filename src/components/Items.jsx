@@ -10,10 +10,8 @@ const Items = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (items.length === 0) {
-      dispatch(fetchAllItems());
-    }
-  }, [dispatch, items.length]);
+    dispatch(fetchAllItems());
+  }, [dispatch]);
 
   console.log('Items Re-rendered');
   return (
