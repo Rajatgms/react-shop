@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { CardDeck, Col } from 'react-bootstrap';
 import Flaticon from './Flaticon';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchItemAsync } from '../actions/itemsAction';
 import Item from './Item';
+import { fetchAllItems } from '../slice/itemsSlice';
 
 const Items = () => {
   const items = useSelector(state => state.items);
@@ -11,7 +11,7 @@ const Items = () => {
 
   useEffect(() => {
     if (items.length === 0) {
-      dispatch(fetchItemAsync());
+      dispatch(fetchAllItems());
     }
   }, [dispatch, items.length]);
 

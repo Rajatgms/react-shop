@@ -47,7 +47,10 @@ const cartSlice = createSlice({
   },
   extraReducers: {
     // if order placed clear cart
-    [placeOrderThunk.fulfilled]: () => []
+    [placeOrderThunk.fulfilled]: () => {
+      localStorage.setItem('cart', JSON.stringify([]));
+      return [];
+    }
   }
 });
 
