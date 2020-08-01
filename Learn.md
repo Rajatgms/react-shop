@@ -1,25 +1,17 @@
-Used Redux, React-Redux, Redux-Thunk to do state management of React Shop Application.
+Used Redux-Toolkit and Redux-Thunk for state management of React Shop Application.
+- React-Redux hooks API - useSelector and useDispatch to interact with store.
+- Redux-Toolkit API for state management.
 
-- Used Redux useSelector and useDispatch.
-- Used Redux-Thunk middleware to define async action creator and access store at action creator.
-
-Pros - 
-1. Centralized state management.
+Benefits of using state management - 
+1. Centralized single store which act as source of truth for whole application state.
 2. No prop-drilling.
-3. Business logic at Redux layer such as Fetch API. 
-4. No unnecessary component re-render.
-5. Usage of Redux-Thunk add simplicity - 
-    
-    a. One action creator syntax - Dispatch Action object or async function from container component.
-    
-    b. Store can be access in action creator function.
-    
-    c. Redux store can be access in action creator hence component no need to map unnecessary state.
-    
-    d. Due to `point c` re-rendering of component due to unnecessary state will remove.
+3. Business logic at Redux layer. 
+4. Easy to scale and refactor application.
 
-6. Improved code readability as no need to create Container Component after useSelector and useDispatch. 
- 
-Cons - 
-1. Need to configure redux.
-2. Manage Redux - action, reducer and container.
+Benefits of using redux-toolkit -
+1. Commonly required utility packages are included and configured in redux-toolkit.
+2. No need to handle default return in reducers.
+3. Automatically create action type and static action creator.  
+4. Reducer uses immer library internally which provide draft state to avoid accidentally mutation state in a reducer.
+5. Easy approach to handle thunk action creator asynchronous request lifecycle.
+6. Many more features to handle common use cases encounter in application development.
