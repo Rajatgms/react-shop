@@ -1,7 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import placeOrder from '../API/placeOrder';
 
 const localCart = localStorage.getItem('cart');
 const initialCartState = localCart ? JSON.parse(localCart) : [];
+
+export const placeOrderThunk = createAsyncThunk(
+  'cart/placeOrderThunk', // action type
+  placeOrder
+)
 
 const cartSlice = createSlice({
   name: 'cart',

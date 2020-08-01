@@ -1,5 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import fetchMarketItems from '../API/fetchMarketItems';
 
+export const fetchAllItems = createAsyncThunk(
+  'items/fetchAllItems',
+  fetchMarketItems
+)
 const itemsSlice = createSlice({
   name: 'items',
   initialState: [],

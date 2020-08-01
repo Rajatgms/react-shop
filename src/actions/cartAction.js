@@ -1,12 +1,15 @@
-import placeOrder from '../API/placeOrder';
-import { saveCart } from '../slice/cartSlice';
+import { placeOrderThunk, saveCart } from '../slice/cartSlice';
 import { startLoader } from '../slice/loaderSlice';
 import { error, success } from '../slice/notifySlice';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 export const handleCartPaymentAsyncAction = () => {
   return dispatch => {
     dispatch(startLoader(true));
-    placeOrder(false)
+    dispatch(placeOrderThunk())
+      // Always return resolved promise with error or payload hence used unwrapResult
+      // extract the payload or error from the action and return or throw the result
+      .then(unwrapResult)
       .then(result => {
         dispatch(saveCart([]));
         dispatch(success(result.message));
