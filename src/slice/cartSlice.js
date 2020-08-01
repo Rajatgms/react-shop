@@ -6,8 +6,8 @@ const initialCartState = localCart ? JSON.parse(localCart) : [];
 
 export const placeOrderThunk = createAsyncThunk(
   'cart/placeOrderThunk', // action type
-  placeOrder
-)
+  placeOrder,
+);
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -23,8 +23,6 @@ const cartSlice = createSlice({
       } else {
         state = [...state, { ...item, quantity: 1 }];
       }
-
-      localStorage.setItem('cart', JSON.stringify(state));
       return state;
     },
     removeCart: (state, action) => {
@@ -37,25 +35,24 @@ const cartSlice = createSlice({
       } else {
         state = state.filter(cartItem => cartItem.name !== item.name);
       }
-      localStorage.setItem('cart', JSON.stringify(state));
       return state;
     },
     saveCart: (state, action) => {
-      localStorage.setItem('cart', JSON.stringify(action.payload));
       return [...action.payload];
     },
   },
-  extraReducers: {
-    // if order placed clear cart
-    [placeOrderThunk.fulfilled]: () => {
-      localStorage.setItem('cart', JSON.stringify([]));
-      return [];
-    }
-  }
+  extraReducers: builder => {
+    builder
+      .addCase(placeOrderThunk.fulfilled, () => [])
+      .addMatcher(
+        action => action.type.startsWith('cart'),
+        state => localStorage.setItem('cart', JSON.stringify(state)),
+      );
+  },
 });
 
-const {actions, reducer} = cartSlice;
+const { actions, reducer } = cartSlice;
 
-export const {addCart, removeCart, saveCart} = actions;
+export const { addCart, removeCart, saveCart } = actions;
 
 export default reducer;
