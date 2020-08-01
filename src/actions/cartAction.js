@@ -1,7 +1,7 @@
 import placeOrder from '../API/placeOrder';
-import cartSlice from '../slice/cartSlice';
-import loaderSlice from '../slice/loaderSlice';
-import notifySlice from '../slice/notifySlice';
+import { saveCart, updateCart } from '../slice/cartSlice';
+import { startLoader } from '../slice/loaderSlice';
+import { success, error } from '../slice/notifySlice';
 
 function nestedCopy (array) {
   return JSON.parse(JSON.stringify(array));
@@ -15,9 +15,9 @@ export const addItem = (item) => {
     const itemExist = cartNestedCopy.find(cartItem => cartItem.name === item.name);
     if (itemExist) {
       itemExist.quantity++;
-      dispatch(cartSlice.actions.updateCart([...cartNestedCopy]));
+      dispatch(updateCart([...cartNestedCopy]));
     } else {
-      dispatch(cartSlice.actions.updateCart([...cartNestedCopy, { ...item, quantity: 1 }]));
+      dispatch(updateCart([...cartNestedCopy, { ...item, quantity: 1 }]));
     }
   };
 };
@@ -30,24 +30,24 @@ export const removeItem = (item) => {
     const itemExist = cartNestedCopy.find(cartItem => cartItem.name === item.name);
     if (itemExist && itemExist.quantity > 1) {
       itemExist.quantity--;
-      dispatch(cartSlice.actions.updateCart([...cartNestedCopy]));
+      dispatch(updateCart([...cartNestedCopy]));
     } else {
-      dispatch(cartSlice.actions.updateCart(cartNestedCopy.filter(cartItem => cartItem.name !== item.name)));
+      dispatch(updateCart(cartNestedCopy.filter(cartItem => cartItem.name !== item.name)));
     }
   };
 };
 
 export const handleCartPaymentAsyncAction = () => {
   return dispatch => {
-    dispatch(loaderSlice.actions.startLoader(true));
+    dispatch(startLoader(true));
     placeOrder(false)
       .then(result => {
-        dispatch(cartSlice.actions.saveCart([]));
-        dispatch(notifySlice.actions.success(result.message));
+        dispatch(saveCart([]));
+        dispatch(success(result.message));
       })
-      .catch(error => {
-        dispatch(notifySlice.actions.error(error.message));
+      .catch(e => {
+        dispatch(error(e.message));
       })
-      .finally(() => dispatch(loaderSlice.actions.startLoader(false)));
+      .finally(() => dispatch(startLoader(false)));
   };
 };

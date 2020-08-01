@@ -7,4 +7,10 @@ const itemsSlice = createSlice({
     saveItems: (state, action) => [...state, ...action.payload],
   },
 });
-export default itemsSlice;
+
+const {actions, reducer} = itemsSlice;
+
+export const {saveItems} = actions;
+
+export default reducer;
+

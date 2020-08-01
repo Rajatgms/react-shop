@@ -8,4 +8,9 @@ const loaderSlice = createSlice({
   },
 });
 
-export default loaderSlice;
+const {actions, reducer} = loaderSlice;
+
+export const {startLoader} = actions;
+
+export default reducer;
+

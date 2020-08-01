@@ -17,7 +17,10 @@ const notifySlice = createSlice({
     ),
     reset: () => initialAlert,
   },
-
 });
 
-export default notifySlice;
+const {actions, reducer} = notifySlice;
+
+export const {success, error, reset} = actions;
+
+export default reducer;

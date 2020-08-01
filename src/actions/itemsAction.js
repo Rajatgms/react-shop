@@ -1,12 +1,12 @@
 import fetchMarketItems from '../API/fetchMarketItems';
-import itemsSlice from '../slice/itemsSlice';
-import loaderSlice from '../slice/loaderSlice';
+import { startLoader } from '../slice/loaderSlice';
+import { saveItems } from '../slice/itemsSlice';
 
 export const fetchItemAsync = () => {
   return dispatch => {
-    dispatch(loaderSlice.actions.startLoader(true));
+    dispatch(startLoader(true));
     fetchMarketItems()
-      .then(items => dispatch(itemsSlice.actions.saveItems(items)))
-      .finally(() => dispatch(loaderSlice.actions.startLoader(false)));
+      .then(items => dispatch(saveItems(items)))
+      .finally(() => dispatch(startLoader(false)));
   };
 };
