@@ -1,30 +1,25 @@
 import placeOrder from '../API/placeOrder';
-import { startLoaderAction } from './loaderAction';
-import { notifyErrorAction, notifySuccessAction } from './notifyAction';
-import { createAction } from '@reduxjs/toolkit';
+import cartSlice from '../slice/cartSlice';
+import loaderSlice from '../slice/loaderSlice';
+import notifySlice from '../slice/notifySlice';
 
-export const UPDATE_CART = 'UPDATE_CART';
-export const SAVE_CART = 'SAVE_CART';
-export const updateCartAction = createAction(UPDATE_CART);
-export const saveCartAction = createAction(SAVE_CART);
-
-function nestedCopy(array) {
+function nestedCopy (array) {
   return JSON.parse(JSON.stringify(array));
 }
 
 export const addItem = (item) => {
   return (dispatch, getStore) => {
-    const {cart} = getStore();
+    const { cart } = getStore();
     const cartNestedCopy = nestedCopy(cart);
 
     const itemExist = cartNestedCopy.find(cartItem => cartItem.name === item.name);
     if (itemExist) {
       itemExist.quantity++;
-      dispatch(updateCartAction([...cartNestedCopy]));
+      dispatch(cartSlice.actions.updateCart([...cartNestedCopy]));
     } else {
-      dispatch(updateCartAction([...cartNestedCopy, { ...item, quantity: 1 }]));
+      dispatch(cartSlice.actions.updateCart([...cartNestedCopy, { ...item, quantity: 1 }]));
     }
-  }
+  };
 };
 
 export const removeItem = (item) => {
@@ -35,24 +30,24 @@ export const removeItem = (item) => {
     const itemExist = cartNestedCopy.find(cartItem => cartItem.name === item.name);
     if (itemExist && itemExist.quantity > 1) {
       itemExist.quantity--;
-      dispatch(updateCartAction([...cartNestedCopy]));
+      dispatch(cartSlice.actions.updateCart([...cartNestedCopy]));
     } else {
-      dispatch(updateCartAction(cartNestedCopy.filter(cartItem => cartItem.name !== item.name)));
+      dispatch(cartSlice.actions.updateCart(cartNestedCopy.filter(cartItem => cartItem.name !== item.name)));
     }
   };
 };
 
 export const handleCartPaymentAsyncAction = () => {
   return dispatch => {
-    dispatch(startLoaderAction(true));
+    dispatch(loaderSlice.actions.startLoader(true));
     placeOrder(false)
       .then(result => {
-        dispatch(saveCartAction([]));
-        dispatch(notifySuccessAction(result.message));
+        dispatch(cartSlice.actions.saveCart([]));
+        dispatch(notifySlice.actions.success(result.message));
       })
       .catch(error => {
-        dispatch(notifyErrorAction(error.message));
+        dispatch(notifySlice.actions.error(error.message));
       })
-      .finally(() => dispatch(startLoaderAction(false)));
+      .finally(() => dispatch(loaderSlice.actions.startLoader(false)));
   };
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { notifyResetAction } from '../actions/notifyAction';
+import notifySlice from '../slice/notifySlice';
 
 const Notify = () => {
   const { variant, message } = useSelector(state => state.notify);
@@ -14,7 +14,7 @@ const Notify = () => {
 
   const onClose = () => {
     setShow(false);
-    dispatch(notifyResetAction());
+    dispatch(notifySlice.actions.reset());
   };
 
   console.log('Notify Re-rendered');

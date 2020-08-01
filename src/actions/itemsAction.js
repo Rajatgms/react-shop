@@ -1,16 +1,12 @@
 import fetchMarketItems from '../API/fetchMarketItems';
-import { startLoaderAction } from './loaderAction';
-import { createAction } from '@reduxjs/toolkit';
-
-export const SAVE_ITEMS = 'SAVE_ITEMS';
-
-export const saveItemAction = createAction(SAVE_ITEMS);
+import itemsSlice from '../slice/itemsSlice';
+import loaderSlice from '../slice/loaderSlice';
 
 export const fetchItemAsync = () => {
   return dispatch => {
-    dispatch(startLoaderAction(true));
+    dispatch(loaderSlice.actions.startLoader(true));
     fetchMarketItems()
-      .then(items => dispatch(saveItemAction(items)))
-      .finally(() => dispatch(startLoaderAction(false)));
+      .then(items => dispatch(itemsSlice.actions.saveItems(items)))
+      .finally(() => dispatch(loaderSlice.actions.startLoader(false)));
   };
-}
+};
