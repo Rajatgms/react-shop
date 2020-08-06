@@ -1,16 +1,16 @@
-React Shop is a React hooks based demo e-commerce application.
+React Shop is a React hooks based demo e-commerce application. Main purpose of the application to showcase how to integrate react-hooks, react-toolkit, react-redux 
+react-bootstrap and react-route.
 
-Main purpose of the application to showcase how to integrate -
-1. react-bootstap and bootstrap
-2. react-route
-3. react-hooks
-4. react-toolkit
-5. react-redux
-
+---
 Local setup
 - ``npm install``
 - ``npm start``
-
+---
+### Live
+GitHub Live Page - [React-Shop](https://rajatgms.github.io/react-shop/)
+- URL - https://rajatgms.github.io/react-shop
+---
+### Tech Overview
 Used Redux-Toolkit and Redux-Thunk for state management of React Shop Application.
 - React-Redux hooks API - useSelector and useDispatch to interact with store.
 - Redux-Toolkit API for state management.
@@ -35,3 +35,20 @@ Benefits of using redux-toolkit -
 5. Easy approach to handle thunk action creator asynchronous request lifecycle. [createAsyncThunk API](https://redux-toolkit.js.org/api/createAsyncThunk#createasyncthunk)
 6. Many more features to handle common use cases encounter in application development.
 
+---
+### Other code branches
+1. [react-hook-base](https://github.com/Rajatgms/react-shop/tree/react-hook-base)
+   
+   Base project created using React Hooks with no state management.
+   
+2. [react-hook-redux-hoc](https://github.com/Rajatgms/react-shop/tree/react-hook-redux-hoc)
+   
+   Used Redux and React-Redux connect HOC - mapStateToProps and mapDispatchToProps for state management.
+   
+3. [react-hook-redux-thunk-hook](https://github.com/Rajatgms/react-shop/tree/react-hook-redux-thunk-hook)
+
+   Used Redux and React-Redux Hooks for state management. 
+   
+4. [react-hook-redux-toolkit](https://github.com/Rajatgms/react-shop/tree/react-hook-redux-toolkit)
+
+   Used Redux-Toolkit and React-Redux Hooks for state management.
